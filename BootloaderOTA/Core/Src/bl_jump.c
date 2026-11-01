@@ -21,7 +21,9 @@ void JumpToApplication(void)
 	appStack = *(volatile uint32_t*)APP_START_ADDR;
 
 	/* Read reset handler address */
-	appRestHandler = *(volatile uint32_t*)(APP_START_ADDR + 4); //***************************** what is this 4
+	/*The first 4 bytes of the application flash contains the initial MSB value.for CortexM processors,
+	 *  the MSB must be set before the application code can start executing*/
+	appResetHandler = *(volatile uint32_t*)(APP_START_ADDR + 4); // application main function start address
 	appEntry = (pFunction)appResetHandler;
 
 	/* Disable interrupts */
