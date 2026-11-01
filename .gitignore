@@ -1,0 +1,56 @@
+# ---- STM32CubeIDE build output ----
+Debug/
+Release/
+build/
+*.o
+*.d
+*.su
+*.cyclo
+*.elf
+*.bin
+*.hex
+*.srec
+*.map
+*.list
+*.lst
+*.a
+*.out
+*.sub
+*.tmp
+*.log
+
+# ---- Eclipse / CubeIDE workspace & IDE state ----
+.metadata/
+.settings/
+.recommenders/
+RemoteSystemsTempFiles/
+.externalToolBuilders/
+.sc/
+.idea/
+.vscode/
+.cache/
+
+
+# ---- Debugger ----
+.gdb_history
+
+# ---- Signing keys & secrets (OTA) ----
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+keys/
+
+# ---- OS / editor junk ----
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+*.bak
+
+# ---- Python helper scripts ----
+__pycache__/
+*.pyc
+.venv/
