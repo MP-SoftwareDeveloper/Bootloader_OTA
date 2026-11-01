@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "flash_layout.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -77,6 +77,10 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
+  /* since Application flash location changed we must relocat the vector table to start of the application flash region*/
+  SCB->VTOR = APP_START_ADDR;
+  __enable_irq(); // we disabled the interupts in bootloader  must enable it again here
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -91,6 +95,8 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_UART_Transmit(&huart1, (uint8_t*)"Inside Application!!\r\n", 22, 100);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -100,6 +106,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+	  HAL_Delay(1000);
+
   }
   /* USER CODE END 3 */
 }

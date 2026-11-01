@@ -95,6 +95,21 @@ int main(void)
 
   HAL_UART_Transmit(&huart1, (uint8_t*)"Inside Bootloader!!\r\n", 21, 100);
 
+  for(int i =0; i<= 7; i++)
+  {
+	 HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
+	 HAL_Delay(100);
+  }
+  for(int i =0; i<= 11; i++)
+  {
+  	 HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
+  	 HAL_Delay(700);
+  }
+  for(int i =0; i<= 7; i++)
+  {
+  	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
+  	HAL_Delay(100);
+  }
   JumpToApplication();
 
   /* USER CODE END 2 */
