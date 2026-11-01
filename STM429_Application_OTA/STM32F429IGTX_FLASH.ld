@@ -45,9 +45,10 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Memories definition */
 MEMORY
 {
-  CCMRAM    (xrw)    : ORIGIN = 0x10000000,   LENGTH = 64K
-  RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 192K
-  FLASH    (rx)    : ORIGIN = 0x0800C000,   LENGTH = 976K
+  CCMRAM     (xrw)   : ORIGIN = 0x10000000,   LENGTH = 64K
+  RAM        (xrw)   : ORIGIN = 0x20000000,   LENGTH = 192K
+  APP_HEADER (rx)    : ORIGIN = 0x08008000    LENGTH = 16k
+  FLASH      (rx)    : ORIGIN = 0x0800C000,   LENGTH = 976K
 }
 
 /* Sections */
@@ -205,4 +206,9 @@ SECTIONS
   }
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
+  
+  	.header :
+  	{
+  	KEEP(*(.header))
+  	} > APP_HEADER
 }

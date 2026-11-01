@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "flash_layout.h"
+#include "app_header.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,6 +57,15 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+__attribute__((section(".header"))) const app_header_t app_header =
+{
+		.ota_flag = 0,
+		.magic    = 0xABCDEFAB,
+		.size     = 0,
+		.crc      = 0,
+		.version  = 0
+};
 
 /* USER CODE END 0 */
 

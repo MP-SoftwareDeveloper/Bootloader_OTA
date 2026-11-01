@@ -95,21 +95,32 @@ int main(void)
 
   HAL_UART_Transmit(&huart1, (uint8_t*)"Inside Bootloader!!\r\n", 21, 100);
 
-  for(int i =0; i<= 7; i++)
+  for(int i =0; i<= 5; i++)
   {
 	 HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
 	 HAL_Delay(100);
   }
-  for(int i =0; i<= 11; i++)
+  for(int i =0; i<= 5; i++)
   {
   	 HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
   	 HAL_Delay(700);
   }
-  for(int i =0; i<= 7; i++)
+  for(int i =0; i<= 5; i++)
   {
   	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
   	HAL_Delay(100);
   }
+
+  if (bootloader_is_app_valid() != 0)
+  {
+	  HAL_UART_Transmit(&huart1,(uint8_t *)"Failed to Jump!!\r\n", 18, 100);
+	 while(1)
+	 {
+		 HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
+		 HAL_Delay(100);
+	 }
+  }
+
   JumpToApplication();
 
   /* USER CODE END 2 */
