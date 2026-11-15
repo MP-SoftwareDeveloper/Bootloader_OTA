@@ -111,9 +111,33 @@ int main(void)
   	HAL_Delay(100);
   }
 
-  if (bootloader_is_app_valid() != 0)
+  int err = bootloader_is_app_valid();
+
+  if ( err != 0)
   {
-	  HAL_UART_Transmit(&huart1,(uint8_t *)"Failed to Jump!!\r\n", 18, 100);
+	 HAL_UART_Transmit(&huart1,(uint8_t *)"Failed to Jump!!\r\n", 18, 100);
+	 switch (err){
+	 case 1:
+		 HAL_UART_Transmit(&huart1,(uint8_t *)"MAGIC ERROR!!\r\n", 15, 100);
+		 break;
+
+	 case 2:
+	 	HAL_UART_Transmit(&huart1,(uint8_t *)"RESET ERROR!!\r\n", 15, 100);
+	 	break;
+
+	 case 3:
+	 	HAL_UART_Transmit(&huart1,(uint8_t *)"SIZE ERROR!!\r\n", 15, 100);
+	 	break;
+
+	 case 4:
+	 	HAL_UART_Transmit(&huart1,(uint8_t *)"CRC ERROR!!\r\n", 15, 100);
+	 	break;
+
+	 default:
+	 	HAL_UART_Transmit(&huart1,(uint8_t *)"ERROR!!\r\n", 9, 100);
+	 	break;
+	 }
+
 	 while(1)
 	 {
 		 HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1);
