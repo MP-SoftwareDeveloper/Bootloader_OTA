@@ -40,7 +40,18 @@ void JumpToApplication(void)
 	/* Set main stack pointer */
 	__set_MSP(appStack);
 
-	/* Jump to application rest handler*/
+	/* Jump to application rest handler, What function is located there? Reset_Handler()*/
+	/*
+	 Reset_Handler()
+	{
+		SystemInit();
+
+		__libc_init_array();
+
+		main();
+	}
+	 */
+
 	appEntry();
 
 }
